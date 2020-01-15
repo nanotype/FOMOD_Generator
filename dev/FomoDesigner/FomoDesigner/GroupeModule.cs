@@ -1,18 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FomoDesigner
 {
     class GroupeModule
     {
-        private List<Module> ListModule;
+        public string Label { get; set; }
+        public List<Module> ListModule { get; set; }
 
-        public GroupeModule()
+        public GroupeModule(string label = null)
         {
+            Label = label;
             ListModule = new List<Module>();
+        }
+
+        public void AddModule(string label)
+        {
+            ListModule.Add(new Module(label));
+        }
+
+        public void DeleteModule(int index)
+        {
+            ListModule.RemoveAt(index);
         }
     }
 }

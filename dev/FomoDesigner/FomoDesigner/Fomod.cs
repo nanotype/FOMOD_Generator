@@ -4,7 +4,7 @@ namespace FomoDesigner
 {
     class Fomod
     {
-        private List<InstallStep> ListInstallStep;
+        public List<InstallStep> ListInstallStep { get; set; }
 
         public Fomod()
         {
@@ -16,19 +16,19 @@ namespace FomoDesigner
             List<string> returnList = new List<string>();
             foreach(InstallStep installStep in ListInstallStep)
             {
-                returnList.Add(installStep.getName());
+                returnList.Add(installStep.Name);
             }
             return returnList;
         }
 
         //public List<>
 
-        public void addInstallStep(string name)
+        public void AddInstallStep(string name)
         {
             ListInstallStep.Add(new InstallStep(name));
         }
 
-        public void deleteInstallStep(int index)
+        public void DeleteInstallStep(int index)
         {
             ListInstallStep.RemoveAt(index);
         }
