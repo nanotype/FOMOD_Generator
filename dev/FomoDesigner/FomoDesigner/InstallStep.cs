@@ -29,14 +29,20 @@ namespace FomoDesigner
             List<TreeViewItem> returnList = new List<TreeViewItem>();
             foreach(GroupeModule groupeModule in ListGroupeModule)
             {
-                TreeViewItem treeViewItem = new TreeViewItem();
-                treeViewItem.Header = groupeModule.Label;
-                treeViewItem.Tag = "GroupModule";
-                foreach(Module module in groupeModule.ListModule)
+                TreeViewItem treeViewItem = new TreeViewItem
                 {
-                    TreeViewItem treeViewItem_child = new TreeViewItem();
-                    treeViewItem_child.Header = module.Label;
-                    treeViewItem_child.Tag = "Module";
+                    Header = groupeModule.Label,
+                    Tag = "GroupModule",
+                    IsExpanded = true
+                };
+
+                foreach (Module module in groupeModule.ListModule)
+                {
+                    TreeViewItem treeViewItem_child = new TreeViewItem
+                    {
+                        Header = module.Label,
+                        Tag = "Module"
+                    };
                     treeViewItem.Items.Add(treeViewItem_child);
                 }
                 returnList.Add(treeViewItem);
