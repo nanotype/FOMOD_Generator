@@ -83,7 +83,7 @@ namespace FomoDesigner
 
         private void UpdateListGroupModule()
         {
-            TV_installStep_listModule.ItemsSource = Fomod.ListInstallStep[LB_listInstallStep.SelectedIndex].GetGroupModuleBinding();
+            TV_installStep_listModule.ItemsSource = Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].GetGroupModuleBinding();
         }
 
         private void LoadTreeViewContextMenu()
@@ -144,7 +144,7 @@ namespace FomoDesigner
             if ((e.Source as TreeView).SelectedItem is TreeViewItem element && element.Tag.ToString() == "Module")
             {
                 TreeViewItem parent = element.Parent as TreeViewItem;
-                TB_installStep_descriptionModule.DataContext = Fomod.ListInstallStep[LB_listInstallStep.SelectedIndex].ListGroupeModule[TV_installStep_listModule.Items.IndexOf(parent)].ListModule[parent.Items.IndexOf(element)].Description;
+                TB_installStep_descriptionModule.DataContext = Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].ListGroupeModule[TV_installStep_listModule.Items.IndexOf(parent)].ListModule[parent.Items.IndexOf(element)].Description;
             }
 
         }
@@ -170,14 +170,14 @@ namespace FomoDesigner
 
         private void AddGroupModule(object sender, RoutedEventArgs e)
         {
-            Fomod.ListInstallStep[LB_listInstallStep.SelectedIndex].AddGroupeModule("New Group Module");
+            Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].AddGroupeModule("New Group Module");
             UpdateListGroupModule();
         }
 
         private void DeleteGroupModule(object sender, RoutedEventArgs e)
         {
             Fomod
-                .ListInstallStep[LB_listInstallStep.SelectedIndex]
+                .InstallSteps[LB_listInstallStep.SelectedIndex]
                 .DeleteGroupeModule(TV_installStep_listModule.Items.IndexOf(TV_installStep_listModule.SelectedItem));
 
             UpdateListGroupModule();
@@ -190,7 +190,7 @@ namespace FomoDesigner
         private void AddModule(object sender, RoutedEventArgs e)
         {
             Fomod
-                .ListInstallStep[LB_listInstallStep.SelectedIndex]
+                .InstallSteps[LB_listInstallStep.SelectedIndex]
                 .ListGroupeModule[TV_installStep_listModule.Items.IndexOf(TV_installStep_listModule.SelectedItem)]
                 .AddModule("New Module");
 
@@ -203,7 +203,7 @@ namespace FomoDesigner
             TreeViewItem parentElement = element2Delete.Parent as TreeViewItem;
 
             Fomod
-                .ListInstallStep[LB_listInstallStep.SelectedIndex]
+                .InstallSteps[LB_listInstallStep.SelectedIndex]
                 .ListGroupeModule[TV_installStep_listModule.Items.IndexOf(parentElement)]
                 .DeleteModule(parentElement.Items.IndexOf(element2Delete));
 
