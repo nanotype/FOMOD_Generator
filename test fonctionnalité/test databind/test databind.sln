@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test databind", "test databind\test databind.csproj", "{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94AEAD6C-44C5-4D9C-9BC6-7E0D653995BC}
+	EndGlobalSection
+EndGlobal

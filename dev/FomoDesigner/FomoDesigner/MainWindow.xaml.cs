@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -8,9 +9,10 @@ namespace FomoDesigner
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private Fomod Fomod { get; set; } = new Fomod();
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWindow()
         {
@@ -58,7 +60,7 @@ namespace FomoDesigner
         private void AddInstallStep(object sender, RoutedEventArgs e)
         {
             Fomod.AddInstallStep("New InstallStep");
-            UpdateListInstallStep();
+            //UpdateListInstallStep();
         }
 
         private void DeleteInstallStep(object sender, RoutedEventArgs e)
@@ -215,5 +217,10 @@ namespace FomoDesigner
         #endregion
 
         #endregion
+
+        private void RaisePropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
     }
 }

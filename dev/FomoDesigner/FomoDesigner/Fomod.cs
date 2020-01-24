@@ -21,8 +21,6 @@ namespace FomoDesigner
             return returnList;
         }
 
-        //public List<>
-
         public void AddInstallStep(string name)
         {
             InstallSteps.Add(new InstallStep(name));
