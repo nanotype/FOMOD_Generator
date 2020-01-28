@@ -51,6 +51,19 @@
                     </DockPanel>
                 </Grid>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_5"/>
+                </TabItem.Header>
+                <StackPanel Background="#FFE5E5E5">
+                    <Button Name="btnSimpleMessageBox" Click="BtnSimpleMessageBox_Click">Simple MessageBox</Button>
+                    <Button Name="btnMessageBoxWithTitle" Click="BtnMessageBoxWithTitle_Click">MessageBox with title</Button>
+                    <Button Name="btnMessageBoxWithButtons" Click="BtnMessageBoxWithButtons_Click">MessageBox with buttons</Button>
+                    <Button Name="btnMessageBoxWithResponse" Click="BtnMessageBoxWithResponse_Click">MessageBox with response</Button>
+                    <Button Name="btnMessageBoxWithIcon" Click="BtnMessageBoxWithIcon_Click">MessageBox with icon</Button>
+                    <Button Name="btnMessageBoxWithDefaultChoice" Click="BtnMessageBoxWithDefaultChoice_Click">MessageBox with default choice</Button>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

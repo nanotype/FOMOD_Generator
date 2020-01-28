@@ -56,5 +56,47 @@ namespace test_databind
                 users.Remove(LB_UserList.SelectedItem as User);
             }
         }
+
+        private void BtnSimpleMessageBox_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, world!");
+        }
+
+        private void BtnMessageBoxWithTitle_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, world!", "My App");
+        }
+
+        private void BtnMessageBoxWithButtons_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This MessageBox has extra options.\n\nHello, world?", "My App", MessageBoxButton.YesNoCancel);
+        }
+
+        private void BtnMessageBoxWithResponse_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Would you like to greet the world with a \"Hello, world\"?", "My App", MessageBoxButton.YesNoCancel);
+            switch (result)
+            {
+                case MessageBoxResult.Yes:
+                    MessageBox.Show("Hello to you too!", "My App");
+                    break;
+                case MessageBoxResult.No:
+                    MessageBox.Show("Oh well, too bad!", "My App");
+                    break;
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Nevermind then...", "My App");
+                    break;
+            }
+        }
+
+        private void BtnMessageBoxWithDefaultChoice_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, world!", "My App", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void BtnMessageBoxWithIcon_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello, world?", "My App", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+        }
     }
 }
