@@ -8,15 +8,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="401" Margin="10,10,0,0" VerticalAlignment="Top" Width="773">
+        <TabControl x:Name="tabControl" Margin="10,10,10,10">
             <TabItem>
                 <TabItem.Header>
                     <Label Content="_1"/>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="77" Margin="10,10,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="Toto" VerticalAlignment="Top" SpellCheck.IsEnabled="True" Width="246"/>
-                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="261,10,0,0" TextWrapping="Wrap" Text="{Binding ElementName=textBox, Path=Text}" VerticalAlignment="Top" Height="77" Width="261"/>
-                    <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="92" Margin="10,92,0,0" TextWrapping="Wrap" Text="{Binding Thomas}" VerticalAlignment="Top" Width="246"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="textBox" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="Linked text" SpellCheck.IsEnabled="True" Grid.Column="0" Grid.Row="0" Margin="0, 0, 1, 0" ToolTip="Ceci est un tooltip"/>
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding ElementName=textBox, Path=Text}" Grid.Column="1" Grid.Row="0" Background="{Binding ElementName=textBox, Path=Background}" Margin="1, 1, 1, 1"/>
+                    <TextBox x:Name="textBox1" TextWrapping="Wrap" Text="{Binding Thomas}" Grid.Row="1" Grid.ColumnSpan="2" Margin="0, 2, 0, 0"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -24,8 +32,12 @@
                     <Label Content="_2"/>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
-                    <local:MyFirstUserControl Title="Titre : " Description="bonjour Thomas" HorizontalAlignment="Left" Height="142" Margin="10,10,0,0" VerticalAlignment="Top" Width="747"/>
-                    <local:MyFirstUserControl Title="Descriptif : " HorizontalAlignment="Left" Height="156" Margin="10,197,0,0" VerticalAlignment="Top" Width="747"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <local:MyFirstUserControl Title="Titre : " Description="bonjour Thomas" Grid.Row="0"/>
+                    <local:MyFirstUserControl Title="Descriptif : " Grid.Row="1"/>
                 </Grid>
             </TabItem>
             <TabItem>
@@ -44,7 +56,7 @@
                     <DockPanel Margin="10">
                         <StackPanel DockPanel.Dock="Right" Margin="10, 0, 0, 0">
                             <Button x:Name="B_AddUser" Click="B_AddUser_Click" Content="Add user"/>
-                            <Button x:Name="B_ChangeUser" Click="B_ChangeUser_Click" Content="Change User"/>
+                            <Button x:Name="B_ChangeUser" Click="B_ChangeUser_Click" Content="Change User" Margin="0, 10"/>
                             <Button x:Name="B_DeleteUser" Click="B_DeleteUser_Click" Content="Delete User"/>
                         </StackPanel>
                         <ListBox x:Name="LB_UserList" DisplayMemberPath="Name"/>
@@ -63,6 +75,63 @@
                     <Button Name="btnMessageBoxWithIcon" Click="BtnMessageBoxWithIcon_Click">MessageBox with icon</Button>
                     <Button Name="btnMessageBoxWithDefaultChoice" Click="BtnMessageBoxWithDefaultChoice_Click">MessageBox with default choice</Button>
                 </StackPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_6"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="350" Width="400*"/>
+                        <ColumnDefinition Width="2"/>
+                        <ColumnDefinition MinWidth="200" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0" Background="#FFE5E5E5" MinWidth="200">
+                        <Grid DockPanel.Dock="Top" Margin="0, 10, 0, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="BtnOpenFile" Click="BtnOpenFile_Click" Grid.Column="1">Récupérer contenu fichier texte</Button>
+                            <Button x:Name="BtnSaveFile" Click="BtnSaveFile_Click" Grid.Column="3">Sauvegarder dans un fichier</Button>
+                        </Grid>
+                        <TextBox x:Name="TboxContentFile" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
+                    </DockPanel>
+                    <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Stretch"/>
+                    <DockPanel Grid.Column="2" Background="#FFE5E5E5">
+                        <Grid DockPanel.Dock="Top" Background="#FFE5E5E5" Margin="0, 10, 0, 10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="BtnOpenBrowser" Click="BtnOpenBrowser_Click" Grid.Column="1">
+                                <Button.Content>Selectionner un dossier</Button.Content>
+                                <Button.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="Bold" FontSize="14" Margin="0, 0, 0, 5">super Tooltip !!!</TextBlock>
+                                        <TextBlock TextWrapping="Wrap">ceci est une seconde section</TextBlock>
+                                        <Border BorderBrush="Silver" BorderThickness="0, 1, 0, 0" Margin="0,8"/>
+                                        <TextBlock TextWrapping="Wrap" FontStyle="Italic">Appuyer sur F1 pour ne rien faire</TextBlock>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
+                        <ListBox x:Name="LB_ContentFolder">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Margin="5, 0"  Source="{Binding Image}"/>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding ElementName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </DockPanel>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

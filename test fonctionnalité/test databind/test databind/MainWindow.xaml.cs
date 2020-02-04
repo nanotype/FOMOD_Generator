@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,6 +99,53 @@ namespace test_databind
         private void BtnMessageBoxWithIcon_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Hello, world?", "My App", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+        }
+
+        private void BtnOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files(*.*)|*.*";
+            if(openFileDialog.ShowDialog() == true)
+            {
+                TboxContentFile.Text = File.ReadAllText(openFileDialog.FileName);
+            }
+        }
+
+        private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text file (*.txt)|*.txt|Victor file (*.vpe)|*.vpe";
+            if(saveFileDialog.ShowDialog() == true)
+            {
+                File.WriteAllText(saveFileDialog.FileName, TboxContentFile.Text);
+            }
+        }
+
+        private void BtnOpenBrowser_Click(object sender, RoutedEventArgs e)
+        {
+            List<FolderContent> items = new List<FolderContent>();
+            
+
+            var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            folderBrowserDialog.ShowDialog();
+            TboxContentFile.Text = folderBrowserDialog.SelectedPath;
+            DirectoryInfo directory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+
+            //bitmapImage = new BitmapImage(new Uri("/image/folder.png", UriKind.Relative));
+            DirectoryInfo[] directoryInfos = directory.GetDirectories();
+            foreach(DirectoryInfo directoryInfo in directoryInfos)
+            {
+                items.Add(new FolderContent(directoryInfo.Name, Properties.Resources.folder));
+            }
+
+            //bitmapImage = new BitmapImage(new Uri("/image/file.png", UriKind.Relative));
+            FileInfo[] fileInfos = directory.GetFiles();
+            foreach (FileInfo fileInfo in fileInfos)
+            {
+                items.Add(new FolderContent(fileInfo.Name, Properties.Resources.file));
+            }
+
+            LB_ContentFolder.ItemsSource = items;
         }
     }
 }

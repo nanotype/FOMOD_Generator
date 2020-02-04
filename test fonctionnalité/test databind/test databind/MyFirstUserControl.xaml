@@ -15,7 +15,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Label Content="{Binding Title}" Target="{Binding ElementName=TBox_Title}"/>
+        <Label Content="{Binding Title}" Target="{Binding ElementName=TBox_Title}" Background="{Binding ElementName=TBox_Title, Path=Background}"/>
         <TextBox Grid.Row="1" x:Name="TBox_Title" TextWrapping="Wrap" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Text="{Binding Description}" />
     </Grid>
 </UserControl>

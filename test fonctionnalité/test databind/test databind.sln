@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test databind", "test databind\test databind.csproj", "{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testDatabind", "test databind\testDatabind.csproj", "{9782E8A2-F595-4B2A-9F2D-52F5AA0DA0EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
