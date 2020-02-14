@@ -19,8 +19,7 @@ namespace test_databind
         public FolderContent(string elementName, Bitmap image)
         {
             ElementName = elementName;
-            IntPtr gdiImage = image.GetHbitmap();
-            Image = Imaging.CreateBitmapSourceFromHBitmap(gdiImage, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            Image = Imaging.CreateBitmapSourceFromHBitmap(image.GetHbitmap(), IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
         }
     }
 }

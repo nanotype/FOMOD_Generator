@@ -7,7 +7,19 @@
         xmlns:Properties="clr-namespace:test_databind.Properties" x:Class="test_databind.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_Menu">
+                <MenuItem Header="_Nouveau"/>
+                <MenuItem Header="_Ouvrir">
+                    <MenuItem Header="un truc"/>
+                    <MenuItem Header="un autre truc"/>
+                </MenuItem>
+                <MenuItem Header="_Sauvegarder"/>
+                <Separator/>
+                <MenuItem Header="_Quitter"/>
+            </MenuItem>
+        </Menu>
         <TabControl x:Name="tabControl" Margin="10,10,10,10">
             <TabItem>
                 <TabItem.Header>
@@ -133,6 +145,47 @@
                     </DockPanel>
                 </Grid>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_7"/>
+                </TabItem.Header>
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock>Hello world, je suis : </TextBlock>
+                        <TextBlock x:Name="TBlock_Name" Margin="0,10" TextAlignment="Center" FontWeight="Bold">[Aucun nom renseigné]</TextBlock>
+                        <Button x:Name="B_MeNommer" Click="B_MeNommer_Click">Mais qui suis-je ?</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_8"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="faire un truc contextuel"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <DockPanel>
+                    <Menu DockPanel.Dock="Top">
+                        <MenuItem Header="_Menu">
+                            <MenuItem IsCheckable="True" Header="_Faire un truc"/>
+                        </MenuItem>
+                    </Menu>
+                    <WrapPanel>
+                        <Button x:Name="B_boutonDeroulant" Click="B_boutonDeroulant_Click" Content="Bouton déroulant" Margin="10">
+                            <Button.Resources>
+                                <ContextMenu x:Key="menuDeroulantBouton">
+                                    <MenuItem Header="element 1"/>
+                                    <MenuItem Header="element 2"/>
+                                    <Separator/>
+                                    <MenuItem Header="element 3"/>
+                                </ContextMenu>
+                            </Button.Resources>
+                        </Button>
+                    </WrapPanel>
+                </DockPanel>
+            </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>

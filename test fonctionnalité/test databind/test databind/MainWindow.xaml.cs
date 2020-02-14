@@ -103,9 +103,11 @@ namespace test_databind
 
         private void BtnOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files(*.*)|*.*";
-            if(openFileDialog.ShowDialog() == true)
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Text files (*.txt)|*.txt|All files(*.*)|*.*"
+            };
+            if (openFileDialog.ShowDialog() == true)
             {
                 TboxContentFile.Text = File.ReadAllText(openFileDialog.FileName);
             }
@@ -113,9 +115,11 @@ namespace test_databind
 
         private void BtnSaveFile_Click(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text file (*.txt)|*.txt|Victor file (*.vpe)|*.vpe";
-            if(saveFileDialog.ShowDialog() == true)
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|Victor file (*.vpe)|*.vpe"
+            };
+            if (saveFileDialog.ShowDialog() == true)
             {
                 File.WriteAllText(saveFileDialog.FileName, TboxContentFile.Text);
             }
@@ -125,20 +129,17 @@ namespace test_databind
         {
             List<FolderContent> items = new List<FolderContent>();
             
-
             var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             folderBrowserDialog.ShowDialog();
             TboxContentFile.Text = folderBrowserDialog.SelectedPath;
             DirectoryInfo directory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
 
-            //bitmapImage = new BitmapImage(new Uri("/image/folder.png", UriKind.Relative));
             DirectoryInfo[] directoryInfos = directory.GetDirectories();
             foreach(DirectoryInfo directoryInfo in directoryInfos)
             {
                 items.Add(new FolderContent(directoryInfo.Name, Properties.Resources.folder));
             }
 
-            //bitmapImage = new BitmapImage(new Uri("/image/file.png", UriKind.Relative));
             FileInfo[] fileInfos = directory.GetFiles();
             foreach (FileInfo fileInfo in fileInfos)
             {
@@ -146,6 +147,22 @@ namespace test_databind
             }
 
             LB_ContentFolder.ItemsSource = items;
+        }
+
+        private void B_MeNommer_Click(object sender, RoutedEventArgs e)
+        {
+            CustomDialogWindow customDialog = new CustomDialogWindow("Qui suis-je ?", "Un connard");
+            if (customDialog.ShowDialog() == true)
+            {
+                TBlock_Name.Text = customDialog.Reponse;
+            }
+        }
+
+        private void B_boutonDeroulant_Click(object sender, RoutedEventArgs e)
+        {
+            ContextMenu contextMenu = B_boutonDeroulant.FindResource("menuDeroulantBouton") as ContextMenu;
+            contextMenu.PlacementTarget = sender as Button;
+            contextMenu.IsOpen = true;
         }
     }
 }
