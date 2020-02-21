@@ -172,7 +172,30 @@
                             <MenuItem IsCheckable="True" Header="_Faire un truc"/>
                         </MenuItem>
                     </Menu>
-                    <WrapPanel>
+                    <DockPanel>
+                        <ToolBarTray DockPanel.Dock="Top">
+                            <ToolBar>
+                                <Button Content="Bouton1"/>
+                                <Button Content="Bouton2" ToolBar.OverflowMode="AsNeeded"/>
+                                <Button Content="Bouton3" ToolBar.OverflowMode="AsNeeded"/>
+                                <Separator />
+                                <Label>Font size:</Label>
+                                <ComboBox>
+                                    <ComboBoxItem>10</ComboBoxItem>
+                                    <ComboBoxItem IsSelected="True">12</ComboBoxItem>
+                                    <ComboBoxItem>14</ComboBoxItem>
+                                    <ComboBoxItem>16</ComboBoxItem>
+                                </ComboBox>
+                            </ToolBar>
+                        </ToolBarTray>
+                        <TextBox AcceptsReturn="True"/>
+                        <ToolBarTray DockPanel.Dock="Right" Orientation="Vertical">
+                            <ToolBar>
+                                <Button Content="Bouton4" ToolBar.OverflowMode="Never"/>
+                                <Button Content="Bouton5" ToolBar.OverflowMode="AsNeeded"/>
+                                <Button Content="Bouton6" ToolBar.OverflowMode="Always"/>
+                            </ToolBar>
+                        </ToolBarTray>
                         <Button x:Name="B_boutonDeroulant" Click="B_boutonDeroulant_Click" Content="Bouton déroulant" Margin="10">
                             <Button.Resources>
                                 <ContextMenu x:Key="menuDeroulantBouton">
@@ -183,7 +206,43 @@
                                 </ContextMenu>
                             </Button.Resources>
                         </Button>
-                    </WrapPanel>
+                    </DockPanel>
+                </DockPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_9"/>
+                </TabItem.Header>
+                <DockPanel>
+                    <StatusBar Name="SB_fakeDownloadStatus" DockPanel.Dock="Bottom">
+                        <StatusBarItem>
+                            <TextBlock Text="{Binding Percent, Mode=TwoWay}">
+                                <TextBlock.DataContext>
+                                    <local:DownloadService/>
+                                </TextBlock.DataContext>
+                            </TextBlock>
+                        </StatusBarItem>
+                        <StatusBarItem>
+                            <ProgressBar x:Name="PB_fakeDownload" Value="{Binding Percent, Mode=TwoWay}" Width="90" Height="16">
+                                <ProgressBar.DataContext>
+                                    <local:DownloadService/>
+                                </ProgressBar.DataContext>
+                            </ProgressBar>
+                        </StatusBarItem>
+                    </StatusBar>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="B_LaunchFakeDownload" Content="Fake Download" Click="B_LaunchFakeDownload_Click" Grid.RowSpan="2"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Accent, Mode=TwoWay}"/>
+                        <Button Grid.Column="1" Grid.Row="1" Content="test double bond" x:Name="B_testDatabind" Click="B_testDatabind_Click"/>
+                    </Grid>
                 </DockPanel>
             </TabItem>
         </TabControl>

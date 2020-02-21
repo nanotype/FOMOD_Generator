@@ -60,6 +60,7 @@
     <Compile Include="CustomDialogWindow.xaml.cs">
       <DependentUpon>CustomDialogWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DownloadService.cs" />
     <Compile Include="FolderContent.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

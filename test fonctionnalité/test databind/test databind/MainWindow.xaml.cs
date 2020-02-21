@@ -22,10 +22,20 @@ namespace test_databind
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public string Thomas { get; set; } = "Thomas apprend le WPF avec Victor !!!";
+        public string Accent { get; set; } = "jé sùïs ûn âcçènt !!!";
+        public bool NomDefini { get; set; } = false;
         private ObservableCollection<User> users = new ObservableCollection<User>();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void NotifyPropertyChanged(string PropertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        private DownloadService DownloadService { get; set; } = new DownloadService();
 
         public MainWindow()
         {
@@ -151,10 +161,20 @@ namespace test_databind
 
         private void B_MeNommer_Click(object sender, RoutedEventArgs e)
         {
-            CustomDialogWindow customDialog = new CustomDialogWindow("Qui suis-je ?", "Un connard");
+            string nomDonne;
+            if(NomDefini)
+            {
+                nomDonne = TBlock_Name.Text;
+            }
+            else
+            {
+                nomDonne = "Un connard";
+            }
+            CustomDialogWindow customDialog = new CustomDialogWindow("Qui suis-je ?", nomDonne);
             if (customDialog.ShowDialog() == true)
             {
                 TBlock_Name.Text = customDialog.Reponse;
+                NomDefini = true;
             }
         }
 
@@ -163,6 +183,17 @@ namespace test_databind
             ContextMenu contextMenu = B_boutonDeroulant.FindResource("menuDeroulantBouton") as ContextMenu;
             contextMenu.PlacementTarget = sender as Button;
             contextMenu.IsOpen = true;
+        }
+
+        private void B_LaunchFakeDownload_Click(object sender, RoutedEventArgs e)
+        {
+            DownloadService.StartTimer();
+        }
+
+        private void B_testDatabind_Click(object sender, RoutedEventArgs e)
+        {
+            Accent = "test Databind réussis !!!";
+            NotifyPropertyChanged("Accent");
         }
     }
 }
