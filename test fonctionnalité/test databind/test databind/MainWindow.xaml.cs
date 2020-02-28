@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,14 +29,16 @@ namespace test_databind
         public string Accent { get; set; } = "jé sùïs ûn âcçènt !!!";
         public bool NomDefini { get; set; } = false;
         private ObservableCollection<User> users = new ObservableCollection<User>();
+        public double Percent { get; set; } = 0;
+        private Timer timer = new Timer(10);
+        private double clockTime;
+        private readonly double waitingTime = 1000;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string PropertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
-
-        private DownloadService DownloadService { get; set; } = new DownloadService();
 
         public MainWindow()
         {
@@ -46,6 +49,8 @@ namespace test_databind
             users.Add(new User() { Name = "Henry Potdbeurre" });
 
             LB_UserList.ItemsSource = users;
+
+            timer.Elapsed += Clock;
         }
 
         private void B_AddUser_Click(object sender, RoutedEventArgs e)
@@ -187,7 +192,23 @@ namespace test_databind
 
         private void B_LaunchFakeDownload_Click(object sender, RoutedEventArgs e)
         {
-            DownloadService.StartTimer();
+            clockTime = 0;
+            //déclenche l'appel de la fonction toute les x millisecondes
+            timer.Enabled = true;
+        }
+
+        private void Clock(object sender, ElapsedEventArgs e)
+        {
+            clockTime += timer.Interval;
+
+            Percent = (clockTime / waitingTime) * 100;
+            NotifyPropertyChanged("Percent");
+
+            if (Percent >= 100)
+            {
+                timer.Enabled = false;
+                MessageBox.Show("Téléchargement terminé !!!", "Fake download");
+            }
         }
 
         private void B_testDatabind_Click(object sender, RoutedEventArgs e)

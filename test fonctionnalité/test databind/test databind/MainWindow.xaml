@@ -151,7 +151,7 @@
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBlock>Hello world, je suis : </TextBlock>
+                        <TextBlock>Hello world, je suis :</TextBlock>
                         <TextBlock x:Name="TBlock_Name" Margin="0,10" TextAlignment="Center" FontWeight="Bold">[Aucun nom renseigné]</TextBlock>
                         <Button x:Name="B_MeNommer" Click="B_MeNommer_Click">Mais qui suis-je ?</Button>
                     </StackPanel>
@@ -215,18 +215,26 @@
                 </TabItem.Header>
                 <DockPanel>
                     <StatusBar Name="SB_fakeDownloadStatus" DockPanel.Dock="Bottom">
-                        <StatusBarItem>
-                            <TextBlock Text="{Binding Percent, Mode=TwoWay}">
-                                <TextBlock.DataContext>
-                                    <local:DownloadService/>
-                                </TextBlock.DataContext>
-                            </TextBlock>
+                        <StatusBar.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                            </ItemsPanelTemplate>
+                        </StatusBar.ItemsPanel>
+                        <StatusBarItem Grid.Column="0" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Percent, Mode=OneWay}"/>
+                                <TextBlock Text=" %"/>
+                            </StackPanel>
                         </StatusBarItem>
-                        <StatusBarItem>
-                            <ProgressBar x:Name="PB_fakeDownload" Value="{Binding Percent, Mode=TwoWay}" Width="90" Height="16">
-                                <ProgressBar.DataContext>
-                                    <local:DownloadService/>
-                                </ProgressBar.DataContext>
+                        <Separator Grid.Column="1"/>
+                        <StatusBarItem Grid.Column="2">
+                            <ProgressBar x:Name="PB_fakeDownload" Value="{Binding Percent, Mode=OneWay}" Width="100" Height="16">
                             </ProgressBar>
                         </StatusBarItem>
                     </StatusBar>
@@ -244,6 +252,62 @@
                         <Button Grid.Column="1" Grid.Row="1" Content="test double bond" x:Name="B_testDatabind" Click="B_testDatabind_Click"/>
                     </Grid>
                 </DockPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_10"/>
+                </TabItem.Header>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="300" Width="500*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition MinWidth="300" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition MinHeight="150" Height="200"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition MinHeight="150" Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="FlowDocumentScrollViewer" Grid.Column="0" Grid.Row="0"/>
+                    <FlowDocumentScrollViewer IsToolBarVisible="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1">
+                        <FlowDocument IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+                            <Paragraph>
+                                Ceci est un texte où j'écris n'importe quoi pour peu que ce soit un texte long et chiant avec beaucoup de mot.
+                                C'est surtout un test pour voir comment fonctionne les propriétés optimal et hyphenation.
+                                Je sais pas bien ce que c'est mais il parait que c'est cool comme truc.
+                            </Paragraph>
+                            <Paragraph>
+                                Ceci est un second paragraphe en esperant que tout ces mots les un contre les autres soient suffisant pour remplir un espace complet.
+                                Je devrait ajouter d'autre éléments à mon écran numéro 10.
+                                Et le saut de ligne pour rendre visible le XAML c'est la vie.
+                            </Paragraph>
+                        </FlowDocument>
+                    </FlowDocumentScrollViewer>
+                    <GridSplitter Height="2" Grid.Column="0" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Stretch"/>
+                    <Label Content="FlowDocumentReader" Grid.Column="0" Grid.Row="3"/>
+                    <FlowDocumentReader Grid.Column="0" Grid.Row="4">
+                        
+                    </FlowDocumentReader>
+                    <GridSplitter Width="2" Grid.Column="1" Grid.RowSpan="5" VerticalAlignment="Stretch"/>
+                    <Label Content="FlowDocumentPageViewer" Grid.Column="2" Grid.Row="0"/>
+                    <FlowDocumentPageViewer Grid.Column="2" Grid.Row="1">
+                        <FlowDocument>
+                            <Paragraph>
+                                djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
+                            </Paragraph>
+                            <Paragraph>
+                                djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
+                            </Paragraph>
+                        </FlowDocument>
+                    </FlowDocumentPageViewer>
+                    <GridSplitter Height="2" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch"/>
+                    <Label Content="RichTextBox" Grid.Column="3" Grid.Row="3" Margin="0, 2, 0, 0"/>
+                    <RichTextBox Grid.Column="2" Grid.Row="4">
+                        
+                    </RichTextBox>
+                </Grid>
             </TabItem>
         </TabControl>
     </DockPanel>
