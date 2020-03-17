@@ -1,0 +1,23 @@
+﻿<Window x:Class="test_databind.NewUserModal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        WindowStartupLocation="CenterScreen"
+        ContentRendered="Window_ContentRendered"
+        SizeToContent="WidthAndHeight"
+        xmlns:local="clr-namespace:test_databind"
+        mc:Ignorable="d"
+        Title="Ajouter un utilisateur">
+    <Grid>
+        <GroupBox Header="Ajouter utilisateur" Margin="5">
+            <StackPanel>
+                <Label Target="{Binding ElementName=NewUser_FirstName}" Content="_Prénom"/>
+                <TextBox x:Name="NewUser_FirstName" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+                <Label Target="{Binding ElementName=NewUser_LastName}" Content="_Nom"/>
+                <TextBox x:Name="NewUser_LastName" Text="{Binding LastName, Mode=TwoWay}"/>
+                <Button x:Name="NewUser_ConfirmButton" Click="NewUser_ConfirmButton_Click" Margin="0,10,0,5" Content="Créer l'utilisateur" IsDefault="True"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

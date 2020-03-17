@@ -259,55 +259,193 @@
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition MinWidth="300" Width="500*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition MinWidth="300" Width="*"/>
+                        <ColumnDefinition MinWidth="150" Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition MinWidth="150" Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition MinHeight="150" Height="200"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition MinHeight="150" Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="FlowDocumentScrollViewer" Grid.Column="0" Grid.Row="0"/>
-                    <FlowDocumentScrollViewer IsToolBarVisible="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0" Grid.Row="1">
-                        <FlowDocument IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
-                            <Paragraph>
-                                Ceci est un texte où j'écris n'importe quoi pour peu que ce soit un texte long et chiant avec beaucoup de mot.
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions >
+                            <RowDefinition MinHeight="100" Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition MinHeight="100" Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Label DockPanel.Dock="Top" Content="FlowDocumentScrollViewer"/>
+                            <FlowDocumentScrollViewer DockPanel.Dock="Bottom" IsToolBarVisible="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <FlowDocument IsOptimalParagraphEnabled="True" IsHyphenationEnabled="True">
+                                    <Paragraph>
+                                        Ceci est un texte où j'écris n'importe quoi pour peu que ce soit un texte long et chiant avec beaucoup de mot.
                                 C'est surtout un test pour voir comment fonctionne les propriétés optimal et hyphenation.
                                 Je sais pas bien ce que c'est mais il parait que c'est cool comme truc.
-                            </Paragraph>
-                            <Paragraph>
-                                Ceci est un second paragraphe en esperant que tout ces mots les un contre les autres soient suffisant pour remplir un espace complet.
+                                    </Paragraph>
+                                    <Paragraph>
+                                        Ceci est un second paragraphe en esperant que tout ces mots les un contre les autres soient suffisant pour remplir un espace complet.
                                 Je devrait ajouter d'autre éléments à mon écran numéro 10.
                                 Et le saut de ligne pour rendre visible le XAML c'est la vie.
-                            </Paragraph>
-                        </FlowDocument>
-                    </FlowDocumentScrollViewer>
-                    <GridSplitter Height="2" Grid.Column="0" Grid.Row="2" Grid.RowSpan="1" HorizontalAlignment="Stretch"/>
-                    <Label Content="FlowDocumentReader" Grid.Column="0" Grid.Row="3"/>
-                    <FlowDocumentReader Grid.Column="0" Grid.Row="4">
-                        
-                    </FlowDocumentReader>
-                    <GridSplitter Width="2" Grid.Column="1" Grid.RowSpan="5" VerticalAlignment="Stretch"/>
-                    <Label Content="FlowDocumentPageViewer" Grid.Column="2" Grid.Row="0"/>
-                    <FlowDocumentPageViewer Grid.Column="2" Grid.Row="1">
-                        <FlowDocument>
-                            <Paragraph>
-                                djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
-                            </Paragraph>
-                            <Paragraph>
-                                djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
-                            </Paragraph>
-                        </FlowDocument>
-                    </FlowDocumentPageViewer>
-                    <GridSplitter Height="2" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch"/>
-                    <Label Content="RichTextBox" Grid.Column="3" Grid.Row="3" Margin="0, 2, 0, 0"/>
-                    <RichTextBox Grid.Column="2" Grid.Row="4">
-                        
-                    </RichTextBox>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </FlowDocumentScrollViewer>
+                        </DockPanel>
+                        <GridSplitter Height="5" Grid.Row="1" HorizontalAlignment="Stretch" Background="Silver"/>
+                        <DockPanel Grid.Row="2">
+                            <Label Content="FlowDocumentReader" DockPanel.Dock="Top"/>
+                            <FlowDocumentReader IsFindEnabled="True" DockPanel.Dock="Bottom">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        Ceci est un texte où j'écris n'importe quoi pour peu que ce soit un texte long et chiant avec beaucoup de mot.
+                                C'est surtout un test pour voir comment fonctionne les propriétés optimal et hyphenation.
+                                Je sais pas bien ce que c'est mais il parait que c'est cool comme truc.
+                                    </Paragraph>
+                                    <Paragraph>
+                                        Ceci est un second paragraphe en esperant que tout ces mots les un contre les autres soient suffisant pour remplir un espace complet.
+                                Je devrait ajouter d'autre éléments à mon écran numéro 10.
+                                Et le saut de ligne pour rendre visible le XAML c'est la vie.
+                                    </Paragraph>
+                                </FlowDocument>
+                            </FlowDocumentReader>
+                        </DockPanel>
+                    </Grid>
+                    <GridSplitter Width="5" Background="Black" Grid.Column="1" HorizontalAlignment="Stretch"/>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MinHeight="100" Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition MinHeight="100" Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Label DockPanel.Dock="Top" Content="FlowDocumentPageViewer"/>
+                            <FlowDocumentPageViewer DockPanel.Dock="Bottom">
+                                <FlowDocument>
+                                    <Paragraph>
+                                        djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
+                                    </Paragraph>
+                                    <Paragraph>
+                                        djmfoqueiu oeiu^hf êiqhfêheifhg rugqy rpughqru gr hgirpugh qiuer qupqghqipruhg qpirugh qrugqruqru  qurhg qipuerhg qur hgq upiu quru q priu qgurr qujh quer pquuq^rihgjq rg hquh qiur iqu epgfqiue qpizuegf qpu qu g q  rgqprugh qhgpquqpurhgq urh gpquhrg urgu rqîebsdj op i
+                                    </Paragraph>
+                                </FlowDocument>
+                            </FlowDocumentPageViewer>
+                        </DockPanel>
+                        <GridSplitter Background="Silver" Height="5" Grid.Row="1" HorizontalAlignment="Stretch"/>
+                        <DockPanel Grid.Row="2">
+                            <Label DockPanel.Dock="Top" Content="RichTextBox"/>
+                            <RichTextBox DockPanel.Dock="Bottom">
+
+                            </RichTextBox>
+                        </DockPanel>
+                    </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_11"/>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border x:Name="Border_RGB" CornerRadius="12, 3, 7, 1" BorderBrush="Silver" BorderThickness="1"  Background="Black" Margin="2, 3">
+                        <StackPanel VerticalAlignment="Center">
+                            <DockPanel>
+                                <Label DockPanel.Dock="Left" Content="_R : " FontWeight="Bold" Target="{Binding ElementName=TBox_SliderValue_Red}"/>
+                                <TextBox x:Name="TBox_SliderValue_Red" DockPanel.Dock="Right" Text="{Binding ElementName=S_Red, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                                <Slider x:Name="S_Red" Maximum="255" TickFrequency="5" TickPlacement="TopLeft" IsSnapToTickEnabled="True" ValueChanged="RGB_ChangedValue"/>
+                            </DockPanel>
+                            <Separator Margin="15,2"/>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Left" Content="_G : " FontWeight="Bold" Target="{Binding ElementName=TBox_SliderValue_Green}"/>
+                                <TextBox x:Name="TBox_SliderValue_Green" DockPanel.Dock="Right" Text="{Binding ElementName=S_Green, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                                <Slider x:Name="S_Green" Maximum="255" TickFrequency="5" TickPlacement="Both" IsSnapToTickEnabled="True" ValueChanged="RGB_ChangedValue"/>
+                            </DockPanel>
+                            <Separator Margin="15,2"/>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Left" Content="_B : " FontWeight="Bold" Target="{Binding ElementName=TBox_SliderValue_Blue}"/>
+                                <TextBox x:Name="TBox_SliderValue_Blue" DockPanel.Dock="Right" Text="{Binding ElementName=S_Blue, Path=Value, UpdateSourceTrigger=PropertyChanged}" Width="40"/>
+                                <Slider x:Name="S_Blue" Maximum="255" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" ValueChanged="RGB_ChangedValue"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderThickness="1, 5, 3, 8"  Background="GhostWhite" Margin="2, 3" Grid.Column="1" BorderBrush="BlueViolet">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBox Text="{Binding ElementName=sliderReference, Path=Value, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Separator/>
+                            <Slider x:Name="sliderReference" Maximum="100" Margin="0,5"/>
+                            <Slider Maximum="100" TickPlacement="BottomRight" TickFrequency="10" IsSnapToTickEnabled="True" Value="{Binding ElementName=sliderReference, Path=Value}" Margin="0,5"/>
+                            <Grid Margin="10,0">
+                                <ProgressBar Minimum="0" Maximum="100" Value="{Binding ElementName=sliderReference, Path=Value}"/>
+                                <TextBlock Text="{Binding Value, ElementName=sliderReference, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                            <ProgressBar IsIndeterminate="True" Margin="10,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush="Silver" BorderThickness="1"  Margin="2, 3" Grid.Row="1" Grid.ColumnSpan="2">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                                <GradientStop Color="red" Offset="0"/>
+                                <GradientStop Color="Green" Offset="0.20"/>
+                                <GradientStop Color="Yellow" Offset="0.60"/>
+                                <GradientStop Color="Turquoise" Offset="0.75"/>
+                                <GradientStop Color="Blue" Offset="0.80"/>
+                                <GradientStop Color="Purple" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_12"/>
+                </TabItem.Header>
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="navigateur_precedent" Content="Précédent" Margin="3,2,2,3" Grid.Column="0" Click="Navigateur_precedent_Click"/>
+                        <Button x:Name="navigateur_suivant" Content="Suivant" Margin="3,2,2,3" Grid.Column="1" Click="Navigateur_suivant_Click"/>
+                        <TextBox x:Name="navigateur_URI" Grid.Column="2" Margin="2" KeyUp="navigateur_URI_KeyUp"/>
+                        <Button x:Name="navigateur_naviguer" Content="Go !!!" Grid.Column="3" Margin="2" Click="Navigateur_naviguer_Click"/>
+                    </Grid>
+                    <WebBrowser x:Name="WB_navigateur" Navigating="WB_navigateur_Navigating"/>
+                </DockPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="_13"/>
+                </TabItem.Header>
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar>
+                            <ComboBox Name="Calendar_ComboBox_ListDisplayMode" Width="100"/>
+                            <Separator/>
+                            <ComboBox Name="Calendar_ComboBox_ListSelectionMode" Width="100"/>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <GroupBox Header="Calendrier">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Viewbox Grid.Column="0">
+                                <Calendar x:Name="Calendar" 
+                                          DisplayMode="{Binding ElementName=Calendar_ComboBox_ListDisplayMode, Path=SelectedValue}"
+                                          SelectionMode="{Binding ElementName=Calendar_ComboBox_ListSelectionMode, Path=SelectedItem}"/>
+                            </Viewbox>
+                            <DockPanel Margin="10, 5, 0, 5" Grid.Column="1">
+                                <TextBox x:Name="Calendar_DateList_DateDetail" DockPanel.Dock="Top" Margin="0, 0, 0, 5" Text="{Binding ElementName=Calendar_DateList, Path=SelectedValue}" KeyDown="Calendar_DateList_DateDetail_KeyDown"/>
+                                <ListBox x:Name="Calendar_DateList" ItemsSource="{Binding ElementName=Calendar, Path=SelectedDates}"/>
+                            </DockPanel>
+                        </Grid>
+                    </GroupBox>
+                </DockPanel>
             </TabItem>
         </TabControl>
     </DockPanel>

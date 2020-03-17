@@ -51,24 +51,40 @@ namespace test_databind
             LB_UserList.ItemsSource = users;
 
             timer.Elapsed += Clock;
+
+            WB_navigateur.Navigate("https://www.google.com");
+
+            Calendar_ComboBox_ListDisplayMode.ItemsSource = Enum.GetValues(typeof (CalendarMode)).Cast<CalendarMode>();
+            Calendar_ComboBox_ListDisplayMode.SelectedItem = Calendar.DisplayMode;
+            Calendar_ComboBox_ListSelectionMode.ItemsSource = Enum.GetValues(typeof(CalendarSelectionMode)).Cast<CalendarSelectionMode>();
+            Calendar_ComboBox_ListSelectionMode.SelectedItem = Calendar.SelectionMode;
+            
         }
 
         private void B_AddUser_Click(object sender, RoutedEventArgs e)
         {
-            users.Add(new User() { Name = "Nouvel utilisateur" });
+            NewUserModal newUserModal = new NewUserModal();
+            if (newUserModal.ShowDialog() == true)
+            {
+                users.Add(newUserModal.NewUser);
+            }
         }
 
         private void B_ChangeUser_Click(object sender, RoutedEventArgs e)
         {
-            if(LB_UserList.SelectedItem != null)
+            if (LB_UserList.SelectedItem != null)
             {
-                (LB_UserList.SelectedItem as User).Name = "Nom modifié";
+                CustomDialogWindow userModification = new CustomDialogWindow("Modifier le nom : ", (LB_UserList.SelectedItem as User).Name);
+                if(userModification.ShowDialog() == true)
+                {
+                    (LB_UserList.SelectedItem as User).Name = userModification.Reponse;
+                }
             }
         }
 
         private void B_DeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            if(LB_UserList.SelectedItem != null)
+            if (LB_UserList.SelectedItem != null)
             {
                 users.Remove(LB_UserList.SelectedItem as User);
             }
@@ -143,14 +159,14 @@ namespace test_databind
         private void BtnOpenBrowser_Click(object sender, RoutedEventArgs e)
         {
             List<FolderContent> items = new List<FolderContent>();
-            
+
             var folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             folderBrowserDialog.ShowDialog();
             TboxContentFile.Text = folderBrowserDialog.SelectedPath;
             DirectoryInfo directory = new DirectoryInfo(folderBrowserDialog.SelectedPath);
 
             DirectoryInfo[] directoryInfos = directory.GetDirectories();
-            foreach(DirectoryInfo directoryInfo in directoryInfos)
+            foreach (DirectoryInfo directoryInfo in directoryInfos)
             {
                 items.Add(new FolderContent(directoryInfo.Name, Properties.Resources.folder));
             }
@@ -167,7 +183,7 @@ namespace test_databind
         private void B_MeNommer_Click(object sender, RoutedEventArgs e)
         {
             string nomDonne;
-            if(NomDefini)
+            if (NomDefini)
             {
                 nomDonne = TBlock_Name.Text;
             }
@@ -215,6 +231,48 @@ namespace test_databind
         {
             Accent = "test Databind réussis !!!";
             NotifyPropertyChanged("Accent");
+        }
+
+        private void RGB_ChangedValue(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Color color = Color.FromRgb((byte)S_Red.Value, (byte)S_Green.Value, (byte)S_Blue.Value);
+            Border_RGB.Background = new SolidColorBrush(color);
+        }
+
+        private void WB_navigateur_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            navigateur_URI.Text = e.Uri.OriginalString;
+        }
+
+        private void Navigateur_precedent_Click(object sender, RoutedEventArgs e)
+        {
+            if (WB_navigateur.CanGoBack)
+                WB_navigateur.GoBack();
+        }
+
+        private void Navigateur_suivant_Click(object sender, RoutedEventArgs e)
+        {
+            if (WB_navigateur.CanGoForward)
+                WB_navigateur.GoForward();
+        }
+
+        private void Navigateur_naviguer_Click(object sender, RoutedEventArgs e)
+        {
+            WB_navigateur.Navigate(navigateur_URI.Text);
+        }
+
+        private void navigateur_URI_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                WB_navigateur.Navigate(navigateur_URI.Text);
+        }
+
+        private void Calendar_DateList_DateDetail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                //Calendar_DateList.SelectedValue = DateTime.Parse(Calendar_DateList_DateDetail.Text);
+            }
         }
     }
 }
