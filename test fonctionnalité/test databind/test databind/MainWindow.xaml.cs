@@ -33,6 +33,7 @@ namespace test_databind
         private Timer timer = new Timer(10);
         private double clockTime;
         private readonly double waitingTime = 1000;
+        public DateTime SelectedDateTime { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string PropertyName)
@@ -49,16 +50,16 @@ namespace test_databind
             users.Add(new User() { Name = "Henry Potdbeurre" });
 
             LB_UserList.ItemsSource = users;
-
+            
             timer.Elapsed += Clock;
 
             WB_navigateur.Navigate("https://www.google.com");
 
-            Calendar_ComboBox_ListDisplayMode.ItemsSource = Enum.GetValues(typeof (CalendarMode)).Cast<CalendarMode>();
+            Calendar_ComboBox_ListDisplayMode.ItemsSource = Enum.GetValues(typeof(CalendarMode)).Cast<CalendarMode>();
             Calendar_ComboBox_ListDisplayMode.SelectedItem = Calendar.DisplayMode;
             Calendar_ComboBox_ListSelectionMode.ItemsSource = Enum.GetValues(typeof(CalendarSelectionMode)).Cast<CalendarSelectionMode>();
             Calendar_ComboBox_ListSelectionMode.SelectedItem = Calendar.SelectionMode;
-            
+
         }
 
         private void B_AddUser_Click(object sender, RoutedEventArgs e)
@@ -75,7 +76,7 @@ namespace test_databind
             if (LB_UserList.SelectedItem != null)
             {
                 CustomDialogWindow userModification = new CustomDialogWindow("Modifier le nom : ", (LB_UserList.SelectedItem as User).Name);
-                if(userModification.ShowDialog() == true)
+                if (userModification.ShowDialog() == true)
                 {
                     (LB_UserList.SelectedItem as User).Name = userModification.Reponse;
                 }
@@ -269,9 +270,13 @@ namespace test_databind
 
         private void Calendar_DateList_DateDetail_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
+                if (Calendar_DateList_DateDetail_Year.Text != "" && Calendar_DateList_DateDetail_Month.Text != "" && Calendar_DateList_DateDetail_Day.Text != "")
+                {
                 //Calendar_DateList.SelectedValue = DateTime.Parse(Calendar_DateList_DateDetail.Text);
+
+                }
             }
         }
     }
