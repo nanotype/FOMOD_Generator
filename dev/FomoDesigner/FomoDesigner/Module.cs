@@ -2,10 +2,10 @@
 
 namespace FomoDesigner
 {
-    class Module
+    public class Module
     {
         public string Label { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = "";
         public string ImagePath { get; set; }
         public List<string> ListFile { get; set; }
         public List<string> ListDirectory { get; set; }

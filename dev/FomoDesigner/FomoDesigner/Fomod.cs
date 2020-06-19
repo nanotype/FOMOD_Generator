@@ -2,7 +2,7 @@
 
 namespace FomoDesigner
 {
-    class Fomod
+     public class Fomod
     {
         public List<InstallStep> InstallSteps { get; set; }
 

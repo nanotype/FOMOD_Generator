@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FomoDesigner
 {
-    class GroupeModule
+    public class GroupeModule
     {
         public string Label { get; set; }
-        public List<Module> ListModule { get; set; }
+        public SelectionTypeEnum SelectionType { get; set; }
+        public ObservableCollection<Module> Modules { get; set; } = new ObservableCollection<Module>();
 
-        public GroupeModule(string label = null)
+        public GroupeModule(string label = "New Group Module")
         {
             Label = label;
-            ListModule = new List<Module>();
         }
 
         public void AddModule(string label)
         {
-            ListModule.Add(new Module(label));
+            Modules.Add(new Module(label));
         }
 
         public void DeleteModule(int index)
         {
-            ListModule.RemoveAt(index);
+            Modules.RemoveAt(index);
         }
     }
 }

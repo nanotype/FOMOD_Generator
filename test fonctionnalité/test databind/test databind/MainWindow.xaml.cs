@@ -279,5 +279,10 @@ namespace test_databind
                 }
             }
         }
+
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

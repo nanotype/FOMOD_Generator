@@ -1,226 +1,68 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace FomoDesigner
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-        private Fomod Fomod { get; set; } = new Fomod();
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ObservableCollection<InstallStep> InstallSteps { get; set; } = new ObservableCollection<InstallStep>();
+        public InstallStep SelectedInstallStep { get; set; } = new InstallStep();
 
         public MainWindow()
         {
             InitializeComponent();
+            ListInstallStep.ItemsSource = InstallSteps;
         }
 
-        #region InstallStep ListBox
+        #region ListInstallStep methods
 
-        #region Function
-
-        private void UpdateListInstallStep()
+        #region event
+        private void ListInstallStep_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LB_listInstallStep.ItemsSource = Fomod.GetInstallStepBinding();
+            SelectedInstallStep = ListInstallStep.SelectedItem as InstallStep;
+            ListGroupModule.ItemsSource = SelectedInstallStep.GroupeModules;
         }
-
         #endregion
 
-        #region Event
-
-        private void LB_listInstallStep_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        #region buttons
+        private void ListInstallStep_Remove_Click(object sender, RoutedEventArgs e)
         {
-            if (LB_listInstallStep.SelectedIndex == -1)
+            if (ListInstallStep.SelectedItem != null)
             {
-                LB_listInstallStep.ContextMenu = LB_listInstallStep.Resources["ListBoxContext"] as ContextMenu;
-            }
-            else
-            {
-                LB_listInstallStep.ContextMenu = LB_listInstallStep.Resources["InstallStepContext"] as ContextMenu;
+                InstallStep elementToDelete = ListInstallStep.SelectedValue as InstallStep;
+                ListInstallStep.SelectedIndex = -1;
+                InstallSteps.Remove(elementToDelete);
             }
         }
-
-        private void LB_listInstallStep_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListInstallStep_Add_Click(object sender, RoutedEventArgs e)
         {
-            if (LB_listInstallStep.SelectedIndex >= 0)
-            {
-                UpdateListGroupModule();
-                TV_installStep_listModule.IsEnabled = true;
-            }
+            InstallSteps.Add(new InstallStep());
         }
-
-        #endregion
-
-        #region ContextMenu function
-
-        private void AddInstallStep(object sender, RoutedEventArgs e)
-        {
-            Fomod.AddInstallStep("New InstallStep");
-            //UpdateListInstallStep();
-        }
-
-        private void DeleteInstallStep(object sender, RoutedEventArgs e)
-        {
-            int Element2Delete = LB_listInstallStep.SelectedIndex;
-            LB_listInstallStep.SelectedIndex = -1;
-            Fomod.DeleteInstallStep(Element2Delete);
-
-            TV_installStep_listModule.ItemsSource = null;
-            TV_installStep_listModule.IsEnabled = false;
-
-            UpdateListInstallStep();
-        }
-
         #endregion
 
         #endregion
 
-        #region GroupModule and Module TreeView
-
-        #region Function
-
-        private void UpdateListGroupModule()
+        private void ListInstallStep_Up_Click(object sender, RoutedEventArgs e)
         {
-            TV_installStep_listModule.ItemsSource = Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].GetGroupModuleBinding();
-        }
-
-        private void LoadTreeViewContextMenu()
-        {
-            if (TV_installStep_listModule.SelectedItem is TreeViewItem selectedItem)
+            if(ListInstallStep.SelectedItem != null)
             {
-                switch (selectedItem.Tag.ToString())
-                {
-                    case "GroupModule":
-                        TV_installStep_listModule.ContextMenu = TV_installStep_listModule.Resources["GroupModuleContext"] as ContextMenu;
-                        break;
-
-                    case "Module":
-                        TV_installStep_listModule.ContextMenu = TV_installStep_listModule.Resources["ModuleContext"] as ContextMenu;
-                        break;
-                }
+                SelectedInstallStep.GroupeModules.Add(new GroupeModule());
             }
-            else
-            {
-                TV_installStep_listModule.ContextMenu = TV_installStep_listModule.Resources["TreeViewContext"] as ContextMenu;
-            }
-        }
-
-        #endregion
-
-        #region Event
-
-        private void TV_installStep_listModule_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            TreeViewItem treeViewItem = GetTreeViewItem(e.OriginalSource as DependencyObject);
-            if (treeViewItem != null)
-            {
-                treeViewItem.Focus();
-                e.Handled = true;
-            }
-            else
-            {
-                if (TV_installStep_listModule.SelectedItem is TreeViewItem selectedItem)
-                {
-                    selectedItem.IsSelected = false;
-                }
-            }
-        }
-
-        private static TreeViewItem GetTreeViewItem(DependencyObject source)
-        {
-            while (source != null && !(source is TreeViewItem))
-            {
-                source = VisualTreeHelper.GetParent(source);
-            }
-            return source as TreeViewItem;
-        }
-
-        private void TV_installStep_listModule_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            LoadTreeViewContextMenu();
-
-            if ((e.Source as TreeView).SelectedItem is TreeViewItem element && element.Tag.ToString() == "Module")
-            {
-                TreeViewItem parent = element.Parent as TreeViewItem;
-                TB_installStep_descriptionModule.DataContext = Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].ListGroupeModule[TV_installStep_listModule.Items.IndexOf(parent)].ListModule[parent.Items.IndexOf(element)].Description;
-            }
-
-        }
-
-        private void TV_installStep_listModule_Loaded(object sender, RoutedEventArgs e)
-        {
-            TV_installStep_listModule.ContextMenu = TV_installStep_listModule.Resources["TreeViewContext"] as ContextMenu;
-        }
-
-        private void TV_installStep_listModule_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (TV_installStep_listModule.SelectedItem is TreeViewItem selectedItem)
-            {
-                selectedItem.IsSelected = false;
-            }
-        }
-
-        #endregion
-
-        #region ContextMenu function
-
-        #region GroupModule
-
-        private void AddGroupModule(object sender, RoutedEventArgs e)
-        {
-            Fomod.InstallSteps[LB_listInstallStep.SelectedIndex].AddGroupeModule("New Group Module");
-            UpdateListGroupModule();
-        }
-
-        private void DeleteGroupModule(object sender, RoutedEventArgs e)
-        {
-            Fomod
-                .InstallSteps[LB_listInstallStep.SelectedIndex]
-                .DeleteGroupeModule(TV_installStep_listModule.Items.IndexOf(TV_installStep_listModule.SelectedItem));
-
-            UpdateListGroupModule();
-        }
-
-        #endregion
-
-        #region Module
-
-        private void AddModule(object sender, RoutedEventArgs e)
-        {
-            Fomod
-                .InstallSteps[LB_listInstallStep.SelectedIndex]
-                .ListGroupeModule[TV_installStep_listModule.Items.IndexOf(TV_installStep_listModule.SelectedItem)]
-                .AddModule("New Module");
-
-            UpdateListGroupModule();
-        }
-
-        private void DeleteModule(object sender, RoutedEventArgs e)
-        {
-            TreeViewItem element2Delete = TV_installStep_listModule.SelectedItem as TreeViewItem;
-            TreeViewItem parentElement = element2Delete.Parent as TreeViewItem;
-
-            Fomod
-                .InstallSteps[LB_listInstallStep.SelectedIndex]
-                .ListGroupeModule[TV_installStep_listModule.Items.IndexOf(parentElement)]
-                .DeleteModule(parentElement.Items.IndexOf(element2Delete));
-
-            UpdateListGroupModule();
-        }
-
-        #endregion
-
-        #endregion
-
-        #endregion
-
-        private void RaisePropertyChanged(string property)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }
