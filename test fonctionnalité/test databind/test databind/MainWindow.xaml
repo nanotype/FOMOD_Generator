@@ -410,7 +410,7 @@
                         </Grid.ColumnDefinitions>
                         <Button x:Name="navigateur_precedent" Content="Précédent" Margin="3,2,2,3" Grid.Column="0" Click="Navigateur_precedent_Click"/>
                         <Button x:Name="navigateur_suivant" Content="Suivant" Margin="3,2,2,3" Grid.Column="1" Click="Navigateur_suivant_Click"/>
-                        <TextBox x:Name="navigateur_URI" Grid.Column="2" Margin="2" KeyUp="navigateur_URI_KeyUp"/>
+                        <TextBox x:Name="navigateur_URI" Grid.Column="2" Margin="2" KeyUp="Navigateur_URI_KeyUp"/>
                         <Button x:Name="navigateur_naviguer" Content="Go !!!" Grid.Column="3" Margin="2" Click="Navigateur_naviguer_Click"/>
                     </Grid>
                     <WebBrowser x:Name="WB_navigateur" Navigating="WB_navigateur_Navigating"/>
@@ -445,12 +445,14 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="70"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" x:Name="Calendar_DateList_DateDetail_Year" ToolTip="Année" Text="{Binding SelectedDateTime.Year, Mode=OneWay}" KeyDown="Calendar_DateList_DateDetail_KeyDown"/>
-                                    <TextBox Grid.Column="1" x:Name="Calendar_DateList_DateDetail_Month" ToolTip="Mois"  Text="{Binding SelectedDateTime.Month, Mode=OneWay}" KeyDown="Calendar_DateList_DateDetail_KeyDown" Margin="2,0"/>
-                                    <TextBox Grid.Column="2" x:Name="Calendar_DateList_DateDetail_Day" ToolTip="Jour"  Text="{Binding SelectedDateTime.Day, Mode=OneWay}" KeyDown="Calendar_DateList_DateDetail_KeyDown"/>
+                                    <TextBox Grid.Column="0" x:Name="Calendar_DateList_DateDetail_Year" ToolTip="Année" KeyDown="Calendar_DateList_DateDetail_KeyDown"/>
+                                    <TextBox Grid.Column="1" x:Name="Calendar_DateList_DateDetail_Month" ToolTip="Mois"  KeyDown="Calendar_DateList_DateDetail_KeyDown" Margin="2,0"/>
+                                    <TextBox Grid.Column="2" x:Name="Calendar_DateList_DateDetail_Day" ToolTip="Jour"  KeyDown="Calendar_DateList_DateDetail_KeyDown"/>
+                                    <Button Grid.Column="3" x:Name="Calendar_DateList_DateDetail_ConfirmButton" ToolTip="modifier la date" Margin="2,0,0,0" Content="Modify" Click="Calendar_DateList_DateDetail_ConfirmButton_Click"/>
                                 </Grid>
-                                <ListBox x:Name="Calendar_DateList" ItemsSource="{Binding ElementName=Calendar, Path=SelectedDates}" SelectedItem="{Binding SelectedDateTime, UpdateSourceTrigger=PropertyChanged}"/>
+                                <ListBox x:Name="Calendar_DateList" ItemsSource="{Binding ElementName=Calendar, Path=SelectedDates}" SelectedItem="{Binding SelectedDateTime, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="Calendar_DateList_SelectionChanged"/>
                             </DockPanel>
                         </Grid>
                     </GroupBox>

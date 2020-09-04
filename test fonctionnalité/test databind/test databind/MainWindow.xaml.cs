@@ -30,7 +30,7 @@ namespace test_databind
         public bool NomDefini { get; set; } = false;
         private ObservableCollection<User> users = new ObservableCollection<User>();
         public double Percent { get; set; } = 0;
-        private Timer timer = new Timer(10);
+        private readonly Timer timer = new Timer(10);
         private double clockTime;
         private readonly double waitingTime = 1000;
         public DateTime SelectedDateTime { get; set; }
@@ -50,7 +50,7 @@ namespace test_databind
             users.Add(new User() { Name = "Henry Potdbeurre" });
 
             LB_UserList.ItemsSource = users;
-            
+
             timer.Elapsed += Clock;
 
             WB_navigateur.Navigate("https://www.google.com");
@@ -262,7 +262,7 @@ namespace test_databind
             WB_navigateur.Navigate(navigateur_URI.Text);
         }
 
-        private void navigateur_URI_KeyUp(object sender, KeyEventArgs e)
+        private void Navigateur_URI_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
                 WB_navigateur.Navigate(navigateur_URI.Text);
@@ -272,14 +272,33 @@ namespace test_databind
         {
             if (e.Key == Key.Enter)
             {
-                if (Calendar_DateList_DateDetail_Year.Text != "" && Calendar_DateList_DateDetail_Month.Text != "" && Calendar_DateList_DateDetail_Day.Text != "")
-                {
-                //Calendar_DateList.SelectedValue = DateTime.Parse(Calendar_DateList_DateDetail.Text);
-
-                }
+                DateSelected_Update();
             }
         }
 
+        private void Calendar_DateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Calendar_DateList_DateDetail_Year.Text = SelectedDateTime.Year.ToString();
+            Calendar_DateList_DateDetail_Month.Text = SelectedDateTime.Month.ToString();
+            Calendar_DateList_DateDetail_Day.Text = SelectedDateTime.Day.ToString();
+        }
+
+        private void Calendar_DateList_DateDetail_ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateSelected_Update();
+        }
+
+        private void DateSelected_Update()
+        {
+            if (
+                int.TryParse(Calendar_DateList_DateDetail_Year.Text, out int year)
+                && int.TryParse(Calendar_DateList_DateDetail_Month.Text, out int month)
+                && int.TryParse(Calendar_DateList_DateDetail_Day.Text, out int day))
+            {
+                SelectedDateTime = new DateTime(year, month, day);
+                Calendar_DateList.SelectedItem = SelectedDateTime;
+            }
+        }
         private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
