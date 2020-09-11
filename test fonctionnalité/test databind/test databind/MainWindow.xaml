@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:test_databind"
         xmlns:Properties="clr-namespace:test_databind.Properties" x:Class="test_databind.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="900">
     <DockPanel MouseDown="DockPanel_MouseDown">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Menu">
@@ -430,6 +430,10 @@
                     </ToolBarTray>
                     <GroupBox Header="Calendrier">
                         <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -437,9 +441,11 @@
                             <Viewbox Grid.Column="0">
                                 <Calendar x:Name="Calendar" 
                                           DisplayMode="{Binding ElementName=Calendar_ComboBox_ListDisplayMode, Path=SelectedValue}"
-                                          SelectionMode="{Binding ElementName=Calendar_ComboBox_ListSelectionMode, Path=SelectedItem}"/>
+                                          SelectionMode="{Binding ElementName=Calendar_ComboBox_ListSelectionMode, Path=SelectedItem}"
+                                          SelectedDate="{Binding Mode=OneWay}"/>
                             </Viewbox>
-                            <DockPanel Margin="10, 5, 0, 5" Grid.Column="1">
+                            <Button Grid.Column="0" Grid.Row="1" Content="exclure" x:Name="Calendar_Exclusion_Button" Click="Calendar_Exclusion_Button_Click"/>
+                            <DockPanel Margin="10, 5, 0, 0" Grid.Column="1" Grid.RowSpan="2">
                                 <Grid DockPanel.Dock="Top" Margin="0, 0, 0, 5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
