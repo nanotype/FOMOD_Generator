@@ -60,6 +60,30 @@ namespace test_databind
 			Calendar_ComboBox_ListSelectionMode.ItemsSource = Enum.GetValues(typeof(CalendarSelectionMode)).Cast<CalendarSelectionMode>();
 			Calendar_ComboBox_ListSelectionMode.SelectedItem = Calendar.SelectionMode;
 
+			Calendar_DatePicker_FormatSelection.ItemsSource = Enum.GetValues(typeof(DatePickerFormat)).Cast<DatePickerFormat>();
+			Calendar_DatePicker_FormatSelection.SelectedIndex = 0;
+
+			Calendar_DateExclusion.SelectedDate = DateTime.Now;
+			Calendar_RangeExclusion_Start.SelectedDate = DateTime.Now;
+			Calendar_RangeExclusion_End.SelectedDate = DateTime.Now;
+
+			Calendar_DatePicker_FormatSelection.ItemsSource = Enum.GetValues(typeof(SelectionMode)).Cast<SelectionMode>();
+			Calendar_DatePicker_FormatSelection.SelectedIndex = 0;
+
+			Expander_ToolBar_ExpandDirection.ItemsSource = Enum.GetValues(typeof(ExpandDirection)).Cast<ExpandDirection>();
+			Expander_ToolBar_ExpandDirection.SelectedIndex = 0;
+
+			IEnumerable<bool> boolEnum = new List<bool> { false, true };
+			Expander_ToolBar_IsExpanded.ItemsSource = boolEnum;
+			Expander_ToolBar_IsExpanded.SelectedIndex = 0;
+
+			TabControl_Placement.ItemsSource = Enum.GetValues(typeof(Dock)).Cast<Dock>();
+			TabControl_Placement.SelectedItem = tabControl.TabStripPlacement;
+
+			List<TaskItem> items = new List<TaskItem>();
+			items.Add(new TaskItem("element1", 50));
+			items.Add(new TaskItem());
+			GenericItemControl.ItemsSource = items;
 		}
 
 		private void B_AddUser_Click(object sender, RoutedEventArgs e)
@@ -268,37 +292,9 @@ namespace test_databind
 				WB_navigateur.Navigate(navigateur_URI.Text);
 		}
 
-		private void Calendar_DateList_DateDetail_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (e.Key == Key.Enter)
-			{
-				DateSelected_Update();
-			}
-		}
-
 		private void Calendar_DateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			Calendar_DateList_DateDetail_Year.Text = SelectedDateTime.Year.ToString();
-			Calendar_DateList_DateDetail_Month.Text = SelectedDateTime.Month.ToString();
-			Calendar_DateList_DateDetail_Day.Text = SelectedDateTime.Day.ToString();
-		}
-
-		private void Calendar_DateList_DateDetail_ConfirmButton_Click(object sender, RoutedEventArgs e)
-		{
-			DateSelected_Update();
-		}
-
-		private void DateSelected_Update()
-		{
-			if (
-				int.TryParse(Calendar_DateList_DateDetail_Year.Text, out int year)
-				&& int.TryParse(Calendar_DateList_DateDetail_Month.Text, out int month)
-				&& int.TryParse(Calendar_DateList_DateDetail_Day.Text, out int day))
-			{
-				// DateTime? est similaire à Nullable<DateTime>
-				DateTime? movingDate = new DateTime(year, month, day);
-				Calendar.SelectedDate = movingDate;
-			}
+			Calendar.SelectedDate = Calendar_DateList.SelectedItem as DateTime?;
 		}
 
 		private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -308,18 +304,36 @@ namespace test_databind
 
 		private void Calendar_Exclusion_Button_Click(object sender, RoutedEventArgs e)
 		{
-			//Calendar.BlackoutDates.AddDatesInPast();
-			foreach(DateTime currentDate in Calendar.SelectedDates)
+			Calendar.BlackoutDates.AddDatesInPast();
+		}
+
+		private void Calendar_RangeExclusion_Exclude_Click(object sender, RoutedEventArgs e)
+		{
+			if(Calendar_RangeExclusion_Start.SelectedDate.HasValue && Calendar_RangeExclusion_End.SelectedDate.HasValue)
 			{
-				if (Calendar.BlackoutDates.Contains(currentDate))
-				{
-					// si la date est déjà exclu
-					Calendar.BlackoutDates.Remove(new CalendarDateRange(new DateTime(currentDate.Year, currentDate.Month, currentDate.Day)));
+				CalendarDateRange range = new CalendarDateRange(Calendar_RangeExclusion_Start.SelectedDate.Value, Calendar_RangeExclusion_End.SelectedDate.Value);
+				if (!Calendar.BlackoutDates.Contains(range)){
+					Calendar.BlackoutDates.Add(range);
 				}
 				else
 				{
-					// Si la date n'est pas exclu
-					Calendar.BlackoutDates.Add(new CalendarDateRange(new DateTime(currentDate.Year, currentDate.Month, currentDate.Day)));
+					Calendar.BlackoutDates.Remove(range);
+				}
+			}
+		}
+
+		private void Calendar_DateExclusion_Exclude_Click(object sender, RoutedEventArgs e)
+		{
+			if (Calendar_DateExclusion.SelectedDate.HasValue)
+			{
+				CalendarDateRange date = new CalendarDateRange(Calendar_DateExclusion.SelectedDate.Value);
+				if (!Calendar.BlackoutDates.Contains(date))
+				{
+					Calendar.BlackoutDates.Add(date);
+				}
+				else
+				{
+					Calendar.BlackoutDates.Remove(date);
 				}
 			}
 		}
