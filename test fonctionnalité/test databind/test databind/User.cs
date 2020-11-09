@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace test_databind
 {
-    public class User : INotifyPropertyChanged
+	public class User : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string name;
+
+        public int Age { get; set; } = -1;
+        public string Mail { get; set; } = "NoMail";
+        public SexType Sex { get; set; } = SexType.Escargot;
+
         public string Name
         {
             get { return name; }
@@ -29,5 +29,10 @@ namespace test_databind
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
-    }
+
+		public override string ToString()
+		{
+            return Name + ", " + Age + " years old";
+		}
+	}
 }

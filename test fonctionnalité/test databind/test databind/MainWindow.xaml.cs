@@ -5,18 +5,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace test_databind
 {
@@ -46,10 +41,13 @@ namespace test_databind
 			InitializeComponent();
 			DataContext = this;
 
-			users.Add(new User() { Name = "Jean Tartempion" });
-			users.Add(new User() { Name = "Henry Potdbeurre" });
+			users.Add(new User() { Name = "Jean Tartempion", Age = 34, Mail = "jean.tartempion@truc.fr" });
+			users.Add(new User() { Name = "Henry Potdbeurre", Age = 22, Mail = "Henry.potdbeurre@machin.com" });
 
 			LB_UserList.ItemsSource = users;
+			ListViewUserWithOverritedToString.ItemsSource = users;
+			ListViewUserWithItemTemplate.ItemsSource = users;
+			ListViewUserWithGridView.ItemsSource = users;
 
 			timer.Elapsed += Clock;
 
@@ -78,12 +76,14 @@ namespace test_databind
 			Expander_ToolBar_IsExpanded.SelectedIndex = 0;
 
 			TabControl_Placement.ItemsSource = Enum.GetValues(typeof(Dock)).Cast<Dock>();
-			TabControl_Placement.SelectedItem = tabControl.TabStripPlacement;
+			TabControl_Placement.SelectedItem = Dock.Top;
 
 			List<TaskItem> items = new List<TaskItem>();
 			items.Add(new TaskItem("element1", 50));
 			items.Add(new TaskItem());
 			GenericItemControl.ItemsSource = items;
+
+			ProgressBar_Color.ItemsSource = typeof(Colors).GetProperties();
 		}
 
 		private void B_AddUser_Click(object sender, RoutedEventArgs e)
@@ -336,6 +336,12 @@ namespace test_databind
 					Calendar.BlackoutDates.Remove(date);
 				}
 			}
+		}
+
+		private void ProgressBar_Color_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			Color selectedColor = (Color)(ProgressBar_Color.SelectedItem as PropertyInfo).GetValue(null, null);
+			this.Background = new SolidColorBrush(selectedColor);
 		}
 	}
 }

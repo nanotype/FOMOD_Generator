@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/TabItem.xaml"/>
+                <ResourceDictionary Source="Style/ListViewHeader.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -542,7 +543,19 @@
                 <DockPanel>
                     <ComboBox
                         Name="ProgressBar_Color"
-                        DockPanel.Dock="Top"/>
+                        IsTextSearchEnabled="True"
+                        DockPanel.Dock="Top" SelectionChanged="ProgressBar_Color_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border BorderBrush="Black" BorderThickness="1">
+                                        <Rectangle Fill="{Binding Name}" Width="16" Height="16"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <ItemsControl Name="GenericItemControl">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -552,12 +565,50 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding Title}"/>
-                                    <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" />
+                                    <ProgressBar Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding Completion}" Name="testcolorforeground"/>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </DockPanel>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <Label Content="16"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <ListView Margin="2" Name="ListViewUserWithOverritedToString" Height="100"/>
+                    <ListView Margin="2" Name="ListViewUserWithItemTemplate" Height="100">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="Name : "/>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                    <TextBlock Text=", Age : "/>
+                                    <TextBlock Text="{Binding Age}" FontWeight="Bold"/>
+                                    <TextBlock Text=" ("/>
+                                    <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                                    <TextBlock Text=")"/>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <ListView Margin="2" Height="100" Name="ListViewUserWithGridView">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Age" Width="120" DisplayMemberBinding="{Binding Age}"/>
+                                <GridViewColumn Header="Mail" Width="Auto">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Mail}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
             </TabItem>
 		</TabControl>
 	</DockPanel>
