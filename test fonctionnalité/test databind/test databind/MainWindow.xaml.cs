@@ -28,6 +28,7 @@ namespace test_databind
 		private readonly Timer timer = new Timer(10);
 		private double clockTime;
 		private readonly double waitingTime = 1000;
+		public SolidColorBrush ProgressBarColor { get; set; } = new SolidColorBrush(Colors.Blue);
 		public DateTime SelectedDateTime { get; set; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -342,6 +343,8 @@ namespace test_databind
 		{
 			Color selectedColor = (Color)(ProgressBar_Color.SelectedItem as PropertyInfo).GetValue(null, null);
 			this.Background = new SolidColorBrush(selectedColor);
+			NotifyPropertyChanged("ProgressBarColor");
+			NotifyPropertyChanged("variableProgressBarColor");
 		}
 	}
 }

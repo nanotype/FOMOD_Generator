@@ -65,6 +65,12 @@
       <DependentUpon>CustomDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderContent.cs" />
+    <Compile Include="Modules\RoomCarto\Donjon.cs" />
+    <Compile Include="Modules\RoomCarto\Room.cs" />
+    <Compile Include="Modules\RoomCarto\RoomCarto.xaml.cs">
+      <DependentUpon>RoomCarto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\RoomCarto\RoomType.cs" />
     <Compile Include="NewUserModal.xaml.cs">
       <DependentUpon>NewUserModal.xaml</DependentUpon>
     </Compile>
@@ -80,7 +86,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Modules\RoomCarto\RoomCarto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\ListViewHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\ProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
