@@ -30,7 +30,7 @@
                         <Label DockPanel.Dock="Top" Content="Liste des InstallSteps :"/>
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Center">
                             <Button Name="ListInstallStep_Add" Content="+" Margin="0 5 0 0" Width="30" ToolTip="Ajouter" Click="ListInstallStep_Add_Click"/>
-                            <Button Content="A_" Margin="5 5 0 0" Width="30" ToolTip="Renommer"/>
+                            <Button Content="A_" Margin="5 5 0 0" Width="30" ToolTip="Renomer"/>
                             <Button Name="ListInstallStep_Up" Content="▲" Margin="5 5 0 0" Width="30" ToolTip="Monter" Click="ListInstallStep_Up_Click"/>
                             <Button Content="▼" Margin="5 5 0 0" Width="30" ToolTip="Descendre"/>
                             <Button Name="ListInstallStep_Remove" Content="x" Margin="5 5 0 0" Width="30" ToolTip="Supprimer" Click="ListInstallStep_Remove_Click"/>
@@ -59,19 +59,26 @@
                                 </TreeView.Resources>
                             </TreeView>
                             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" Margin="5 0"/>
-                            <Grid Grid.Column="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBox Grid.Row="0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" Text=""/>
-                                <Border  Grid.Row="1" BorderThickness="1" BorderBrush="Black">
-                                    <Grid Background="Silver">
-                                        <Image/>
-                                        <Label Content="Double clic for adding image" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TabControl Grid.Column="2">
+                                <TabItem Header="Affichage">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBox Grid.Row="0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" Text=""/>
+                                        <Border  Grid.Row="1" BorderThickness="1" BorderBrush="Black">
+                                            <Grid Background="Silver">
+                                                <Image/>
+                                                <Label Content="Double clic for adding image" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
                                     </Grid>
-                                </Border>
-                            </Grid>
+                                </TabItem>
+                                <TabItem Header="Configuration">
+                                    
+                                </TabItem>
+                            </TabControl>
                         </Grid>
                     </GroupBox>
                 </Grid>

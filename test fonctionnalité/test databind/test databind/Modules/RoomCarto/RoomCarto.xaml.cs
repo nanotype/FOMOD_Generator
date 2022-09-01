@@ -68,8 +68,8 @@ namespace test_databind.Modules.RoomCarto
 
 					dessin.Children.Add(rectangle);
 
-					Canvas.SetLeft(rectangle, i * (size + space));
-					Canvas.SetTop(rectangle, j * (size + space));
+					//Canvas.SetLeft(rectangle, i * (size + space));
+					//Canvas.SetTop(rectangle, j * (size + space));
 				}
 			}
 		}

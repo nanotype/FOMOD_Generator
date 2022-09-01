@@ -157,5 +157,25 @@
   <ItemGroup>
     <None Include="image\interrogation.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\01\" />
+    <Folder Include="Modules\02\" />
+    <Folder Include="Modules\03\" />
+    <Folder Include="Modules\04\" />
+    <Folder Include="Modules\05\" />
+    <Folder Include="Modules\06\" />
+    <Folder Include="Modules\07\" />
+    <Folder Include="Modules\08\" />
+    <Folder Include="Modules\09\" />
+    <Folder Include="Modules\10\" />
+    <Folder Include="Modules\11\" />
+    <Folder Include="Modules\12\" />
+    <Folder Include="Modules\13\" />
+    <Folder Include="Modules\14\" />
+    <Folder Include="Modules\15\" />
+    <Folder Include="Modules\16\" />
+    <Folder Include="Modules\17\" />
+    <Folder Include="Modules\18\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
