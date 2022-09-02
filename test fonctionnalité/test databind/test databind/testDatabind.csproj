@@ -65,6 +65,9 @@
       <DependentUpon>CustomDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderContent.cs" />
+    <Compile Include="Modules\00\PointDEntree.xaml.cs">
+      <DependentUpon>PointDEntree.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\RoomCarto\Donjon.cs" />
     <Compile Include="Modules\RoomCarto\Room.cs" />
     <Compile Include="Modules\RoomCarto\RoomCarto.xaml.cs">
@@ -83,6 +86,10 @@
     <Compile Include="TaskItem.cs" />
     <Compile Include="User.cs" />
     <Page Include="CustomDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\00\PointDEntree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
