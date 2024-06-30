@@ -37,11 +37,15 @@ namespace test_databind
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
 		}
 
+		/// <summary>
+		/// fonction principale : initialisation des composant
+		/// </summary>
 		public MainWindow()
 		{
 			InitializeComponent();
 			DataContext = this;
 
+			// ajout données utilisateurs
 			users.Add(new User() { Name = "Jean Tartempion", Age = 34, Mail = "jean.tartempion@truc.fr" });
 			users.Add(new User() { Name = "Henry Potdbeurre", Age = 22, Mail = "Henry.potdbeurre@machin.com" });
 
@@ -215,7 +219,7 @@ namespace test_databind
 			}
 			else
 			{
-				nomDonne = "Un connard";
+				nomDonne = "Machin";
 			}
 			CustomDialogWindow customDialog = new CustomDialogWindow("Qui suis-je ?", nomDonne);
 			if (customDialog.ShowDialog() == true)
