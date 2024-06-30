@@ -65,6 +65,9 @@
       <DependentUpon>CustomDialogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="FolderContent.cs" />
+    <Compile Include="Modules\00\PointDEntree.xaml.cs">
+      <DependentUpon>PointDEntree.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Modules\RoomCarto\Donjon.cs" />
     <Compile Include="Modules\RoomCarto\Room.cs" />
     <Compile Include="Modules\RoomCarto\RoomCarto.xaml.cs">
@@ -83,6 +86,10 @@
     <Compile Include="TaskItem.cs" />
     <Compile Include="User.cs" />
     <Page Include="CustomDialogWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Modules\00\PointDEntree.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +163,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="image\interrogation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Modules\01\" />
+    <Folder Include="Modules\02\" />
+    <Folder Include="Modules\03\" />
+    <Folder Include="Modules\04\" />
+    <Folder Include="Modules\05\" />
+    <Folder Include="Modules\06\" />
+    <Folder Include="Modules\07\" />
+    <Folder Include="Modules\08\" />
+    <Folder Include="Modules\09\" />
+    <Folder Include="Modules\10\" />
+    <Folder Include="Modules\11\" />
+    <Folder Include="Modules\12\" />
+    <Folder Include="Modules\13\" />
+    <Folder Include="Modules\14\" />
+    <Folder Include="Modules\15\" />
+    <Folder Include="Modules\16\" />
+    <Folder Include="Modules\17\" />
+    <Folder Include="Modules\18\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

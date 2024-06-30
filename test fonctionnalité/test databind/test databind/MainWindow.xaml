@@ -3,8 +3,8 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:local="clr-namespace:test_databind"
-    x:Class="test_databind.MainWindow"
+		xmlns:local="clr-namespace:test_databind" xmlns:element0="clr-namespace:test_databind.Modules._00"
+        x:Class="test_databind.MainWindow"
 		mc:Ignorable="d"
 		Title="MainWindow" Height="500" Width="900">
     <Window.Resources>
@@ -32,10 +32,10 @@
         <TabControl x:Name="tabControl" 
                     TabStripPlacement="{Binding SelectedItem, ElementName=TabControl_Placement}"
                     Margin="10,10,10,10">
-            <TabItem>
-                <TabItem.Header>
-                    <Label Content="_1"/>
-                </TabItem.Header>
+            <TabItem Header="0">
+                <element0:PointDEntree/>
+            </TabItem>
+            <TabItem Header="1">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
